@@ -11,4 +11,4 @@ Image tag: `[Enter image tag ]`
 Image tag: `[Enter image Tag]`
 
 - **EU Region:**
-Image tag: `[Enter image Tag]`
+Image tag: `[Enter the image Tag]`
