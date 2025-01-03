@@ -5,7 +5,7 @@ Deploy to Stage env
 ----
 
 - **US Region:**
-Image tag: `[enter image tag ]`
+Image tag: `[Enter image tag ]`
 
 - **AP Region:**
 Image tag: `[Enter image Tag]`
