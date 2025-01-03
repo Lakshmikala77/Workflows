@@ -26,10 +26,16 @@ jobs:
         node-version: '14'
 
     - name: Install dependencies
-      run: npm install
+      run: |
+        # Navigate to the directory containing package.json if it's not in the root
+        cd path/to/your/directory
+        npm install
 
     - name: Run tests
-      run: npm test
+      run: |
+        # Navigate to the directory containing package.json if it's not in the root
+        cd path/to/your/directory
+        npm test
 
   deploy:
     needs: build
