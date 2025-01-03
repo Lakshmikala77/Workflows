@@ -1,0 +1,30 @@
+name: PR Template
+
+on:
+  pull_request_target:
+    branches:
+      - dev
+      - staging
+
+jobs:
+  pr-template:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set PR Template
+      run: |
+        if [ "${{ github.base_ref }}" == "dev" ]; then
+          echo "Using dev template"
+          cp .github/PULL_REQUEST_TEMPLATE/dev_template.md .github/PULL_REQUEST_TEMPLATE.md
+        elif [ "${{ github.base_ref }}" == "staging" ]; then
+          echo "Using staging template"
+          cp .github/PULL_REQUEST_TEMPLATE/staging_template.md .github/PULL_REQUEST_TEMPLATE.md
+        fi
+
+    - name: Commit and push
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add .github/PULL_REQUEST_TEMPLATE.md
+        git commit -m "Set PR template based on base branch"
+        git push

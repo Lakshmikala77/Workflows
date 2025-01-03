@@ -1,20 +1,56 @@
-name: Deploy to GKE
+name: CI/CD Pipeline
 
-on: 
+on:
   push:
     branches:
-      -main
+      - feature
+      - dev
+      - staging
+  pull_request:
+    branches:
+      - dev
+      - staging
+      - production
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      -name: checkout code
-       uses:
-        actions/checkout@v3
-      -name: Set up Google Cloud CLI
-      uses:
-       google-github-actions/setup-gcloud@v1
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-           service_account_key: ${{secrets)
-          
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to environment
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/feature" ]; then
+          echo "Deploying to Feature Environment"
+          # Add deployment commands for feature environment
+        elif [ "${{ github.ref }}" == "refs/heads/dev" ]; then
+          echo "Deploying to Dev Environment"
+          # Add deployment commands for dev environment
+        elif [ "${{ github.ref }}" == "refs/heads/staging" ]; then
+          echo "Deploying to Staging Environment"
+          # Add deployment commands for staging environment
+        elif [ "${{ github.ref }}" == "refs/heads/production" ]; then
+          echo "Deploying to Production Environment"
+          # Add deployment commands for production environment
+        fi
