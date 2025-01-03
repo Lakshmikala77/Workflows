@@ -5,10 +5,10 @@ Deploy to PROD env
 ----
 
 - **US Region:**
-Image tag: `[enter image tag ]`
+Image tag: `[Enter image tag ]`
 
 - **AP Region:**
-Image tag: `[Enter image Tag]`
+Image tag: `[Enter Image Tag]`
 
 - **EU Region:**
 Image tag: `[Enter image Tag]`
