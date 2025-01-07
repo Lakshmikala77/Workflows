@@ -3,3 +3,4 @@
 
     - name: Run tests
       run: cd subdirectory && npm test
+
