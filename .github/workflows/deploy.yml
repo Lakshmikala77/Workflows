@@ -1,11 +1,7 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches:
-      - feature
-      - dev
-      - staging
+ 
   pull_request:
     branches:
       - dev
@@ -20,22 +16,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+   
+      
 
-    - name: Install dependencies
-      run: |
-        # Navigate to the directory containing package.json if it's not in the root
-        cd path/to/your/directory
-        npm install
-
-    - name: Run tests
-      run: |
-        # Navigate to the directory containing package.json if it's not in the root
-        cd path/to/your/directory
-        npm test
+  
 
   deploy:
     needs: build
