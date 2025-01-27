@@ -1,0 +1,38 @@
+name: Manual Deployment Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Select target branch for deployment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - staging_production
+
+jobs:
+  validate-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Target Branch
+        run: |
+          TARGET_BRANCH="${{ github.event.inputs.target_branch }}"
+          HEAD_BRANCH="${GITHUB_REF#refs/heads/}"
+
+          echo "Head branch: $HEAD_BRANCH"
+          echo "Target branch: $TARGET_BRANCH"
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+    
+  tests_coverage:
+    needs: lint
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
